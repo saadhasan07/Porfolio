@@ -35,8 +35,7 @@ build:
   writeStats: true
 enableGitInfo: true
 summaryLength: 30
-pagination:
-  pagerSize: 10
+paginate: 10
 enableEmoji: true
 enableRobotsTXT: true
 footnotereturnlinkcontents: <sup>^</sup>
@@ -44,22 +43,90 @@ ignoreFiles: [\.ipynb$, .ipynb_checkpoints$, \.Rmd$, \.Rmarkdown$, _cache$]
 permalinks:
   authors: '/author/:slug/'
 disableAliases: true
+
+# Services Configuration
+services:
+  googleAnalytics:
+    ID: ''
+
+# Output formats
 outputs:
-  home: [HTML, RSS, headers, redirects, backlinks]
+  home: [HTML, RSS, JSON, WebAppManifest, headers, redirects]
   section: [HTML, RSS]
+
+# Imaging
 imaging:
   resampleFilter: Lanczos
-  quality: 80
+  quality: 75
   anchor: Smart
-timeout: 600s
+
+# Taxonomies
 taxonomies:
   author: authors
   tag: tags
+  category: categories
+
+# Security
+security:
+  enableInlineShortcodes: false
+  exec:
+    allow: ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$']
+    osEnv: ['(?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM)$']
+
+# Privacy
+privacy:
+  disqus:
+    disable: true
+  googleAnalytics:
+    anonymizeIP: true
+    disable: true
+    respectDoNotTrack: true
+    useSessionStorage: true
+  instagram:
+    disable: true
+    simple: true
+  twitter:
+    disable: true
+    enableDNT: true
+    simple: true
+  vimeo:
+    disable: true
+    enableDNT: true
+    simple: true
+  youtube:
+    disable: true
+    privacyEnhanced: true
+
 markup:
   _merge: deep
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+    parser:
+      attribute:
+        block: true
+        title: true
+      autoHeadingID: true
+      autoHeadingIDType: github
+    renderer:
+      hardWraps: false
+      unsafe: false
+      xhtml: false
   highlight:
+    anchorLineNos: false
+    codeFences: true
+    guessSyntax: false
     lineNos: false
-security:
-  _merge: deep
-sitemap:
-  _merge: deep
+    noClasses: false
+    style: monokai
+  tableOfContents:
+    endLevel: 3
+    ordered: false
+    startLevel: 2
