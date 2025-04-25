@@ -6,13 +6,13 @@
 
 imports:
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
-    disable: false
+    version: v5.9.6
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-netlify
-    disable: false
+    version: v1.1.1
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-reveal
-    disable: false
+    version: v1.1.1
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-tailwind
-    disable: false
+    version: v1.1.1
 
 # Mount directories to the site
 mounts:
