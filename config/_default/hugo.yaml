@@ -18,6 +18,16 @@ defaultContentLanguageInSubdir: false
 removePathAccents: true
 
 ############################
+## MODULES
+############################
+
+module:
+  proxy: direct
+  hugoVersion:
+    extended: true
+    min: "0.119.0"
+
+############################
 ## ADVANCED
 ############################
 
