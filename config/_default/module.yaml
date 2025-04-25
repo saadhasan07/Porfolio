@@ -6,11 +6,15 @@
 
 imports:
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
+    disable: false
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-netlify
+    disable: false
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-reveal
+    disable: false
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-tailwind
+    disable: false
 
-# Install any Hugo Blox within the `hugo-blox/blox/` folder
+# Mount directories to the site
 mounts:
   - source: content
     target: content
@@ -26,3 +30,8 @@ mounts:
     target: i18n
   - source: archetypes
     target: archetypes
+
+# Advanced Hugo module configuration
+noVendor: true
+proxy: direct
+noMounts: false

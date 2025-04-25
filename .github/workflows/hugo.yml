@@ -36,7 +36,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: '0.119.0'
           extended: true
 
       - name: Setup Pages
@@ -48,17 +48,28 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git
 
+      - name: Clean Hugo cache
+        run: |
+          rm -rf resources
+          hugo mod clean
+          hugo mod tidy
+
       - name: Initialize Hugo Modules
         run: |
           hugo mod init github.com/saadhasan07/Porfolio
           hugo mod get -u
+          hugo mod verify
+          
+      - name: List Hugo Modules
+        run: hugo mod graph
 
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
           HUGO_ENV: production
         run: |
-          hugo --minify --baseURL "https://saadhasan07.github.io/Porfolio/"
+          hugo version
+          hugo --logLevel debug --minify --baseURL "https://saadhasan07.github.io/Porfolio/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
