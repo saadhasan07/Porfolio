@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.119.0
+      GO111MODULE: on
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,16 +52,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y git
 
-      - name: Clean Hugo Module Cache
+      - name: Clean and Setup
         run: |
-          rm -rf $HUGO_CACHEDIR
+          rm -rf public resources
+          git clean -fdx
           hugo mod clean --all
-
-      - name: Initialize Hugo Modules
-        run: |
-          hugo mod init github.com/saadhasan07/Porfolio
-          hugo mod get
-          hugo mod verify
 
       - name: Build with Hugo
         env:
@@ -68,7 +64,8 @@ jobs:
           HUGO_ENV: production
         run: |
           hugo version
-          hugo --minify --baseURL "https://saadhasan07.github.io/Porfolio/"
+          hugo mod get
+          hugo --gc --minify --baseURL "https://saadhasan07.github.io/Porfolio/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
